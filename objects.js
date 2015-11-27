@@ -164,10 +164,11 @@ SpriteMorph.prototype.categories =
         'pen',
         'variables',
         'lists',
-        'other'
+        'other',
+        'moreBlock'             /*added categori*/
     ];
 
-SpriteMorph.prototype.blockColor = {
+SpriteMorph.prototype.blockColor = {        /*catagori color*/
     motion : new Color(74, 108, 212),
     looks : new Color(143, 86, 227),
     sound : new Color(207, 74, 217),
@@ -177,7 +178,8 @@ SpriteMorph.prototype.blockColor = {
     operators : new Color(98, 194, 19),
     variables : new Color(243, 118, 29),
     lists : new Color(217, 77, 17),
-    other: new Color(150, 150, 150)
+    other: new Color(150, 150, 150),
+    moreBlock : new Color(0,0,0)        /*added block color */
 };
 
 SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
@@ -2174,8 +2176,39 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         button.selector = 'addCustomBlock';
         button.showHelp = BlockMorph.prototype.showHelp;
         blocks.push(button);
+    }else if (cat === 'moreBlock') {        /*sjl*/
+        button = new PushButtonMorph(
+            null,
+            function () {
+                new ExtensionDialogMorph(
+                    null,
+                    function (definition) {
+                        if (definition.spec !== '') {
+                            if (definition.isGlobal) {
+                                stage.globalBlocks.push(definition);
+                            } else {
+                                myself.customBlocks.push(definition);
+                            }
+                            ide.flushPaletteCache();
+                            ide.refreshPalette();
+                            new BlockEditorMorph(definition, myself).popUp();
+                        }
+                    },
+                    myself
+                ).prompt(
+                    'Extension Library',
+                    null,
+                    myself.world()
+                );
+            },
+            'Add an Extension'
+        );
+        button.userMenu = helpMenu;
+        button.selector = 'addVariable';
+        button.showHelp = BlockMorph.prototype.showHelp;
+        blocks.push(button);
     }
-    return blocks;
+        return blocks;
 };
 
 SpriteMorph.prototype.palette = function (category) {

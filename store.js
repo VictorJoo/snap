@@ -90,7 +90,7 @@ XML_Serializer.prototype.version = 1; // increment on structural change
 
 // XML_Serializer accessing:
 
-XML_Serializer.prototype.serialize = function (object) {
+XML_Serializer.prototype.serialize = function (object) {        /*sjl*/
     // public: answer an XML string representing the given object
     var xml;
     this.flush(); // in case an error occurred in an earlier attempt
@@ -1401,7 +1401,7 @@ Array.prototype.toXML = function (serializer) {
 // Sprites
 
 StageMorph.prototype.toXML = function (serializer) {
-    var thumbnail = this.thumbnail(SnapSerializer.prototype.thumbnailSize),
+    var thumbnail = this.thumbnail(SnapSerializer.prototype.thumbnailSize), //썸네일 이미지화?
         thumbdata,
         ide = this.parentThatIsA(IDE_Morph);
 

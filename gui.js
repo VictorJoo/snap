@@ -1339,7 +1339,7 @@ IDE_Morph.prototype.createSpriteEditor = function () {
         div.style.height = document.getElementById('world').height - 120 + "px";
 
         div.style.position = "relative";
-        div.style.top = 110+"px";
+        div.style.top = 130+"px";
         div.style.left = 210+"px";
 
         if( document.getElementById('frameDiv')){
@@ -1603,7 +1603,7 @@ IDE_Morph.prototype.fixLayout = function (situation) {
                     div.style.height = document.getElementById('world').height - 120 + "px";
 
                     div.style.position = "relative";
-                    div.style.top = 110+"px";
+                    div.style.top = 130+"px";
                     div.style.left = 210+"px";
 
                     if( document.getElementById('frameDiv')){
@@ -2223,12 +2223,12 @@ IDE_Morph.prototype.cloudMenu = function () {
             'changeCloudPassword'
         );
     }
-    if (shiftClicked) {
+    if (shiftClicked) {     //cloud에서 project export 하는 공간
         menu.addLine();
         menu.addItem(
             'export project media only...',
             function () {
-                if (myself.projectName) {
+                if (myself.projectName) {           //projcet name 입력
                     myself.exportProjectMedia(myself.projectName);
                 } else {
                     myself.prompt('Export Project As...', function (name) {
