@@ -1730,6 +1730,10 @@ ExtensionDialogMorph.prototype.openForChange = function (
     this.drawNew();
     this.popUp(world);
 };
+// category Icone
+ExtensionDialogMorph.prototype.createIcon = function(source){
+    var src = source;
+}
 
 // category buttons
 
@@ -1754,7 +1758,7 @@ ExtensionDialogMorph.prototype.addCategoryButton = function (category) {
         ],
         button;
 
-    button = new ToggleButtonMorph(
+        button = new ToggleButtonMorph(
         colors,
         this, // this block dialog box is the target
         function () {
@@ -1961,7 +1965,7 @@ ExtensionDialogMorph.prototype.setScope = function (varType) {
 
 // other ops
 
-ExtensionDialogMorph.prototype.getInput = function () {
+ExtensionDialogMorph.prototype.getInput = function () {     //설정한 블록을 sprite editor로 입력
     var spec, def, body;
     if (this.body instanceof InputFieldMorph) {
         spec = this.normalizeSpaces(this.body.getValue());
@@ -1991,17 +1995,20 @@ ExtensionDialogMorph.prototype.fixLayout = function () {
             this.padding,
             th + this.padding
         )));
-        this.silentSetWidth(this.body.width() + this.padding * 2 + 400);    /*addsjl 높이 추가*/
+        this.silentSetWidth(this.body.width() + this.padding * 2 + 600);    /*addsjl 넓이 추가*/
         this.silentSetHeight(
-            this.body.height() + this.padding * 2 + th + 300     /*addsjl 넓이 추가*/
-        );
+         this.body.height() + this.padding * 2 + th     /*addsjl 높이 추가*/
+         );
         if (this.categories) {
             this.categories.setCenter(this.body.center());
             this.categories.setTop(this.body.top());
+            this.categories.setLeft(140);
+            this.categories.setWidth(720);  //sjl
+            this.categories.setHeight(500); //sjl
             this.body.setTop(this.categories.bottom() + this.padding);
             this.silentSetHeight(
-                this.height()
-                + this.categories.height()
+                /*this.height()+*/
+                this.categories.height()
                 + this.padding
             );
         }
@@ -2036,7 +2043,7 @@ ExtensionDialogMorph.prototype.fixLayout = function () {
         }
     }
 
-    if (this.label) {
+    if (this.label) {           /*title sjl*/
         this.label.setCenter(this.center());
         this.label.setTop(this.top() + (th - this.label.height()) / 2);
     }
